@@ -1,0 +1,17 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: orange;
+}
+
+h1 {
+	color: lime;
+}
+
+p {
+	color: yellow;
+}
