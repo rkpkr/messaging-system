@@ -2,17 +2,19 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>Login</title>
+	<title>User Registration</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
  <div class='page'>
-  <form action='' method='post' name='login'>
+  <form action='' method='post' name='register'>
   	{{ form.hidden_tag() }}
   	<p> Username:<br>
   		{{ form.user() }}<br>
   		Password: <br>
   		{{ form.password() }}<br>
+      Password Confirm: <br>
+      {{ form.confirm() }}<br>
   		<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1">
   	</p>
   </form>
