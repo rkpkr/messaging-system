@@ -10,9 +10,10 @@
   <form action='' method='post' name='login'>
   	{{ form.hidden_tag() }}
   	<p> Username:<br>
-  		{{ form.user(size=80) }}<br>
+  		{{ form.user() }}<br>
   		Password: <br>
-  		{{ form.password(size=80) }}<br>
+  		{{ form.password() }}<br>
+  		<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1">
   	</p>
   </form>
  </div>
