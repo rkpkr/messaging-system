@@ -1,6 +1,6 @@
 from . import app
 from flask import render_template, request, flash, redirect
-from .models.users import User
+from .models import User
 from .forms import Register, Login
 
 @app.route('/test')
@@ -12,13 +12,14 @@ def register():
 	form = Register()
 	if form.validate_on_submit():
 		try:
-			new_user = User(form.user.data, form.password.data)
+			new_user = User(form.username.data, form.passwd.data)
 			new_user.authenticated = True
-			with open('users.txt') as f:
-				f.append(new_user)
+			db.session.add(new_user)
+			db.session.commit()
 			flash('Registration Successful!')
-			return redirect('/main')
+			return redirect(url_for('main.html'))
 		except IntegrityError:
+			db.session.rollback()
 			flash('ERROR! User already exists.')
 	return render_template('registration.html', form=form)
 

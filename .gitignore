@@ -5,3 +5,4 @@ __pycache__/
 project/__pycache__/
 project/tests/__pycache__/
 config.py
+db_create.py

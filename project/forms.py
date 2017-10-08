@@ -3,9 +3,9 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import Length, DataRequired, EqualTo
 
 class Register(FlaskForm):
-	user = StringField('username', validators=[DataRequired(),
+	username = StringField('username', validators=[DataRequired(),
 		Length(min=6, max=15)])
-	password = PasswordField('password', validators=[DataRequired(),
+	passwd = PasswordField('password', validators=[DataRequired(),
 		Length(min=6, max=30)])
 	confirm = PasswordField('Repeat Password', validators=[DataRequired(),
 		EqualTo('password')])

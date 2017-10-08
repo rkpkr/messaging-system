@@ -7,12 +7,12 @@
 </head>
 <body>
  <div class='page'>
-  <form action='' method='post' name='register'>
+  <form action="" method='post' name='register'>
   	{{ form.hidden_tag() }}
   	<p> Username:<br>
-  		{{ form.user() }}<br>
+  		{{ form.username() }}<br>
   		Password: <br>
-  		{{ form.password() }}<br>
+  		{{ form.passwd() }}<br>
       Password Confirm: <br>
       {{ form.confirm() }}<br>
   		<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1">
