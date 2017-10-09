@@ -5,10 +5,10 @@ from wtforms.validators import Length, DataRequired, EqualTo
 class Register(FlaskForm):
 	username = StringField('username', validators=[DataRequired(),
 		Length(min=6, max=15)])
-	passwd = PasswordField('password', validators=[DataRequired(),
+	passwd = PasswordField('passwd', validators=[DataRequired(),
 		Length(min=6, max=30)])
 	confirm = PasswordField('Repeat Password', validators=[DataRequired(),
-		EqualTo('password')])
+		EqualTo('passwd')])
 
 class Login(FlaskForm):
 	user = StringField('username', validators=[DataRequired(),

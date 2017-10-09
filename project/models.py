@@ -21,7 +21,7 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String, unique=True, nullable=False)
-    password_plaintext = db.Column(db.String, nullable=False)  # TEMPORARY - TO BE DELETED IN FAVOR OF HASHED PASSWORD
+    password_plaintext = db.Column(db.String, nullable=False)  # TEMPORARY
 
     def __init__(self, username, password_plaintext):
         self.username = username
