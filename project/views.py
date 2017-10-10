@@ -1,13 +1,12 @@
-from . import app, db
+from . import app, db, login_manager
 from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_user, logout_user, current_user, login_required
 from .models import User
 from .forms import Register, Login
 
+
 @app.route('/test')
 def test():
-	test_user = User('aaa','bbb')
-	db.session.add(test_user)
-	db.session.commit()
 	return render_template('test.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -32,10 +31,27 @@ def register():
 def login():
 	form = Login()
 	if form.validate_on_submit():
-		flash('Login requested for {0}'.format(form.user.data))
-		return redirect('/main')
+		user = User.query.filter_by(username=form.user.data).first()
+		if user is not None and user.password_check(form.password.data):
+			user.authenticated = True
+			db.session.add(user)
+			db.session.commit()
+			login_user(user)
+			flash('Logged in successfully')
+			return redirect('/main')
 	return render_template('login.html', form=form)
 
+@app.route('/logout')
+@login_required
+def logout():
+	user = current_user
+	user.authenticated = False
+	db.session.add(user)
+	db.session.commit()
+	logout_user()
+	return redirect('/')
+
 @app.route('/main', methods=['GET', 'POST'])
+@login_required
 def main():
 	return render_template('main.html')
