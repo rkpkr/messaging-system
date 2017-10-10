@@ -1,5 +1,6 @@
 from . import db
 from sqlalchemy.ext.hybrid import hybrid_method
+from bcrypt import checkpw
 
 class Contact(db.Model):
 
@@ -22,12 +23,12 @@ class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	username = db.Column(db.String, unique=True, nullable=False)
-	password_plaintext = db.Column(db.String, nullable=False)  # TEMPORARY
+	password = db.Column(db.Binary(60), nullable=False)  
 	authenticated = db.Column(db.Boolean, default=False)
 
 	@hybrid_method
-	def password_check(self, password_plaintext):
-		return self.password_plaintext == password_plaintext
+	def password_check(self, password):
+		return checkpw(password.encode(), self.password)
 
 	@property
 	def is_authenticated(self):
@@ -44,7 +45,7 @@ class User(db.Model):
 	def get_id(self):
 		return str(self.id)
 
-	def __init__(self, username, password_plaintext):
+	def __init__(self, username, password):
 		self.username = username
-		self.password_plaintext = password_plaintext
+		self.password = password
 		self.authenticated = False

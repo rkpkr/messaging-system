@@ -3,6 +3,7 @@ from flask import render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, current_user, login_required
 from .models import User
 from .forms import Register, Login
+from bcrypt import hashpw, gensalt
 
 
 @app.route('/test')
@@ -15,7 +16,8 @@ def register():
 	if request.method == 'POST':
 		if register_form.validate_on_submit():
 			try:
-				new_user = User(register_form.username.data, register_form.passwd.data)
+				new_user = User(register_form.username.data,
+					hashpw((register_form.passwd.data).encode(), gensalt()))
 				new_user.authenticated = True
 				db.session.add(new_user)
 				db.session.commit()
