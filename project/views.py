@@ -2,7 +2,7 @@ from . import app, db, login_manager
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, current_user, login_required
 from .models import User
-from .forms import Register, Login
+from .forms import Register, Login, SendMessages
 from bcrypt import hashpw, gensalt
 
 
@@ -56,4 +56,8 @@ def logout():
 @app.route('/main', methods=['GET', 'POST'])
 @login_required
 def main():
-	return render_template('main.html')
+	form = SendMessages()
+	if form.validate_on_submit():
+		msg = form.message.data
+		print(msg)
+	return render_template('main.html', form=form)

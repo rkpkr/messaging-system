@@ -26,6 +26,8 @@ class User(db.Model):
 	password = db.Column(db.Binary(60), nullable=False)  
 	authenticated = db.Column(db.Boolean, default=False)
 
+	# Uses bcrypt's checkpw function to compare input password to hashed password
+	# in database. encode() is used because bcrypt only accepts bytes, not strings
 	@hybrid_method
 	def password_check(self, password):
 		return checkpw(password.encode(), self.password)
