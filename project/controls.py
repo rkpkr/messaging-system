@@ -19,8 +19,11 @@ def get_contacts():
 def format_contacts(numbers):
 	formatted_numbers = []
 	for n in numbers:
+		is_formatted = re.search(r'\+\d{11}', n)
 		is_valid = re.search(r'(\(?\d{3}\D{0,3}\d{3}\D{0,3}\d{4}).*?', n)
-		if is_valid:
+		if is_formatted:
+			formatted_numbers.append(n)
+		elif is_valid:
 			# add + symbol and international code to phone number for Twilio
 			f_number = "+1"
 			for c in n:
