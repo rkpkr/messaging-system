@@ -1,4 +1,5 @@
 import os
+import re
 from . import db
 from .models import Contact
 from twilio.rest import Client
@@ -18,10 +19,14 @@ def get_contacts():
 def format_contacts(numbers):
 	formatted_numbers = []
 	for n in numbers:
-		# the + symbol is necessary for Twilio, and the 1 is the international
-		# code for U.S. phone numbers
-		# change it depending on the country of the phone numbers
-		formatted_numbers.append("+1" + n)
+		is_valid = re.search(r'(\(?\d{3}\D{0,3}\d{3}\D{0,3}\d{4}).*?', n)
+		if is_valid:
+			# add + symbol and international code to phone number for Twilio
+			f_number = "+1"
+			for c in n:
+				if c.isdigit():
+					f_number = f_number + c
+			formatted_numbers.append(f_number)
 	return formatted_numbers
 
 def send_messages(from_number, to_numbers, message):

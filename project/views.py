@@ -62,5 +62,6 @@ def main():
 		msg = form.message.data
 		contacts = get_contacts()
 		f_contacts = format_contacts(contacts)
+		print(f_contacts)
 		#send_messages(my_number, f_contacts, msg)
 	return render_template('main.html', form=form)
