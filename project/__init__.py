@@ -20,4 +20,4 @@ from .models import User
 def load_user(user_id):
     return User.query.filter(User.id == int(user_id)).first()
 
-from . import views
+from . import views, controls

@@ -4,6 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from .models import User
 from .forms import Register, Login, SendMessages
 from bcrypt import hashpw, gensalt
+from .controls import get_contacts, format_contacts, my_number, send_messages
 
 
 @app.route('/test')
@@ -59,5 +60,7 @@ def main():
 	form = SendMessages()
 	if form.validate_on_submit():
 		msg = form.message.data
-		print(msg)
+		contacts = get_contacts()
+		f_contacts = format_contacts(contacts)
+		#send_messages(my_number, f_contacts, msg)
 	return render_template('main.html', form=form)
