@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8"/>
-	<title>User Registration</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
  <div class='page'>
   <form action="{{ url_for('register') }}" method='post' name='register'>
   	{{ form.hidden_tag() }}
@@ -19,5 +14,4 @@
   	</p>
   </form>
  </div>
-</body>
-</html>
+{% endblock %}

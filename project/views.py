@@ -9,7 +9,7 @@ from .controls import get_contacts, format_contacts, my_number, send_messages
 
 @app.route('/test')
 def test():
-	return render_template('test.html')
+	return render_template('test.html', title='Test Page')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -27,7 +27,7 @@ def register():
 			except IntegrityError:
 				db.session.rollback()
 				flash('ERROR! User already exists.')
-	return render_template('registration.html', form=register_form)
+	return render_template('registration.html', title='Registration', form=register_form)
 
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
@@ -42,7 +42,7 @@ def login():
 			login_user(user)
 			flash('Logged in successfully')
 			return redirect('/main')
-	return render_template('login.html', form=form)
+	return render_template('login.html', title='Login', form=form)
 
 @app.route('/logout')
 @login_required
@@ -64,4 +64,4 @@ def main():
 		f_contacts = format_contacts(contacts)
 		print(f_contacts)
 		#send_messages(my_number, f_contacts, msg)
-	return render_template('main.html', form=form)
+	return render_template('main.html', title='Send Message', form=form)

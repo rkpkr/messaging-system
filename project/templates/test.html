@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8"/>
-	<title>Test Page</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
 	<h1>Testing, testing, 1, 2, 3</h1>
 	<p>Hello, world!</p>
-
-</body>
-</html>
+{% endblock %}
