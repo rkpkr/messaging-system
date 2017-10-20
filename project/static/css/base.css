@@ -38,10 +38,34 @@ header {
 .top a:link,
 a:visited {
 	background-color: #9BCF97;
+	color: black;
 }
 
 .top a:hover,
 a:active {
 	background-color: #c1cdcd;
-	
+	color: black;
+}
+
+.flash {
+	width: 50%;
+	height: 100px;
+	padding-top: 20px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+
+.flashes {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.flashes li {
+	list-style-type: none;
+	height: 30px;
+	width: 100%;
+	font-size: 20px;
+	font: red;
 }

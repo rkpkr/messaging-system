@@ -11,10 +11,20 @@
 		<ul class='top'>
 			<li><a href='{{ url_for('login') }}'>Login</a></li>
 			<li><a href='{{ url_for('register') }}'>Register</a></li>
-			<li><a href='{{ url_for('main') }}'>Main</a></li>
+			<li><a href='{{ url_for('send') }}'>Send</a></li>
+			<li><a href='{{ url_for('manage') }}'>Manage</a></li>
 			<li><a href='{{ url_for('logout') }}'>Logout</a></li>
 		</ul>
 	</header>
+	<div class='flash'>{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			  <ul class='flashes'>
+			  {% for message in messages %}
+			    <li>{{ message }}</li>
+			  {% endfor %}
+			  </ul>
+			{% endif %}
+		  {% endwith %}</div>
 	{% block content %}{% endblock %}
 </body>
 </html>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manage.css') }}">
+ <div class='page'>
+  <form action="{{ url_for('manage') }}" method='post' name='addcontact'>
+  	{{ form.hidden_tag() }}
+  	<div class='item'> {{ form.fname.label() }}</div>
+  	<div class='item'> {{ form.fname() }} </div>
+  	<div class='item'> {{ form.lname.label() }}</div>
+  	<div class='item'> {{ form.lname() }} </div>
+  	<div class='item'> {{ form.phnumber.label() }}</div>
+  	<div class='item'> {{ form.phnumber() }} </div>
+  	<div class='item'> {{ form.addSubmit(value='Add') }} </div>
+  </form>
+ </div>
+{% endblock %}

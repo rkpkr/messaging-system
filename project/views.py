@@ -1,8 +1,8 @@
 from . import app, db, login_manager
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, current_user, login_required
-from .models import User
-from .forms import Register, Login, SendMessages
+from .models import User, Contact
+from .forms import Register, Login, SendMessages, AddContact
 from bcrypt import hashpw, gensalt
 from .controls import get_contacts, format_contacts, my_number, send_messages
 
@@ -40,8 +40,7 @@ def login():
 			db.session.add(user)
 			db.session.commit()
 			login_user(user)
-			flash('Logged in successfully')
-			return redirect('/main')
+			return redirect('/send')
 	return render_template('login.html', title='Login', form=form)
 
 @app.route('/logout')
@@ -54,9 +53,9 @@ def logout():
 	logout_user()
 	return redirect('/')
 
-@app.route('/main', methods=['GET', 'POST'])
+@app.route('/send', methods=['GET', 'POST'])
 @login_required
-def main():
+def send():
 	form = SendMessages()
 	if form.validate_on_submit():
 		msg = form.message.data
@@ -64,4 +63,23 @@ def main():
 		f_contacts = format_contacts(contacts)
 		print(f_contacts)
 		#send_messages(my_number, f_contacts, msg)
-	return render_template('main.html', title='Send Message', form=form)
+	return render_template('send.html', title='Send Message', form=form)
+
+@app.route('/manage', methods=['GET', 'POST'])
+@login_required
+def manage():
+	form = AddContact()
+	if form.validate_on_submit():
+		try:
+			dupe_check = Contact.query.filter_by(phnumber=form.phnumber.data).first()
+			if dupe_check is not None:
+				flash('Phone number already exists.')
+			else:
+				new_contact = Contact(form.fname.data, form.lname.data, form.phnumber.data)
+				db.session.add(new_contact)
+				db.session.commit()
+				return redirect('/manage')
+		except IntegrityError:
+			db.session.rollback()
+			flash('ERROR! Phone number already exists.')
+	return render_template('manage.html', title='Contact Management', form=form)
