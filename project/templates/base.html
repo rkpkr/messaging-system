@@ -8,9 +8,11 @@
 </head>
 <body>
 	<header>
-		<ul class='top'>
+		<ul class='login'>
 			<li><a href='{{ url_for('login') }}'>Login</a></li>
-			<li><a href='{{ url_for('register') }}'>Register</a></li>
+		</ul>
+		<h1>Flaskio Messenger</h1>
+		<ul class='top'>
 			<li><a href='{{ url_for('send') }}'>Send</a></li>
 			<li><a href='{{ url_for('manage') }}'>Manage</a></li>
 			<li><a href='{{ url_for('logout') }}'>Logout</a></li>
