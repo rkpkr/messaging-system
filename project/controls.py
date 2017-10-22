@@ -39,6 +39,13 @@ def send_messages(from_number, to_numbers, message):
 			from_=from_number,
 			body=message)
 
+def format_number(phonenumber):
+	clean_number = ''
+	for c in phonenumber:
+		if c.isdigit():
+			clean_number = clean_number + c
+	return clean_number
+
 
 if __name__ == "__main__":
 	pass

@@ -2,15 +2,23 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/manage.css') }}">
  <div class='page'>
-  <form action="{{ url_for('manage') }}" method='post' name='addcontact'>
-  	{{ form.hidden_tag() }}
-  	<div class='item'> {{ form.fname.label() }}</div>
-  	<div class='item'> {{ form.fname() }} </div>
-  	<div class='item'> {{ form.lname.label() }}</div>
-  	<div class='item'> {{ form.lname() }} </div>
-  	<div class='item'> {{ form.phnumber.label() }}</div>
-  	<div class='item'> {{ form.phnumber() }} </div>
-  	<div class='item'> {{ form.addSubmit(value='Add') }} </div>
+  <div class='forms'>
+  <form class='add' action="{{ url_for('manage') }}" method='post' name='addcontact'>
+  	{{ addForm.hidden_tag() }}
+  	<div class='item'> {{ addForm.fname.label() }}</div>
+  	<div class='item'> {{ addForm.fname() }} </div>
+  	<div class='item'> {{ addForm.lname.label() }}</div>
+  	<div class='item'> {{ addForm.lname() }} </div>
+  	<div class='item'> {{ addForm.phnumber.label() }}</div>
+  	<div class='item'> {{ addForm.phnumber() }} </div>
+  	<div class='item'> {{ addForm.addSubmit(value='Add') }} </div>
   </form>
+  <form class='remove' action="{{ url_for('manage') }}" method='post' name='removecontact'>
+  	{{ remForm.hidden_tag() }}
+  	<div class='item'> {{ remForm.pnumber.label() }}</div>
+  	<div class='item'> {{ remForm.pnumber() }} </div>
+  	<div class='item'> {{ remForm.remSubmit(value='Remove') }} </div>
+  </form>
+  </div>
  </div>
 {% endblock %}

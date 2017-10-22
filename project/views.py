@@ -2,9 +2,9 @@ from . import app, db, login_manager
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, current_user, login_required
 from .models import User, Contact
-from .forms import Register, Login, SendMessages, AddContact
+from .forms import Register, Login, SendMessages, AddContact, RemoveContact
 from bcrypt import hashpw, gensalt
-from .controls import get_contacts, format_contacts, my_number, send_messages
+from .controls import get_contacts, format_contacts, my_number, send_messages, format_number
 
 
 @app.route('/test')
@@ -68,18 +68,29 @@ def send():
 @app.route('/manage', methods=['GET', 'POST'])
 @login_required
 def manage():
-	form = AddContact()
-	if form.validate_on_submit():
+	addForm = AddContact()
+	remForm = RemoveContact()
+	if addForm.validate_on_submit() and addForm.addSubmit.data:
 		try:
-			dupe_check = Contact.query.filter_by(phnumber=form.phnumber.data).first()
+			dupe_check = Contact.query.filter_by(phnumber=addForm.phnumber.data).first()
 			if dupe_check is not None:
 				flash('Phone number already exists.')
 			else:
-				new_contact = Contact(form.fname.data, form.lname.data, form.phnumber.data)
+				new_number = format_number(addForm.phnumber.data)
+				new_contact = Contact(addForm.fname.data, addForm.lname.data, new_number)
 				db.session.add(new_contact)
 				db.session.commit()
 				return redirect('/manage')
 		except IntegrityError:
 			db.session.rollback()
 			flash('ERROR! Phone number already exists.')
-	return render_template('manage.html', title='Contact Management', form=form)
+	elif remForm.validate_on_submit() and remForm.remSubmit.data:
+		try:
+			contact = Contact.query.filter_by(phnumber=format_number(remForm.pnumber.data)).first()
+			db.session.delete(contact)
+			db.session.commit()
+			return redirect('/manage')
+		except IntegrityError:
+			db.session.rollback()
+			flash('ERROR! Phone number not found.')
+	return render_template('manage.html', title='Contact Management', addForm=addForm, remForm=remForm)

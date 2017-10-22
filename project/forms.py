@@ -25,3 +25,7 @@ class AddContact(FlaskForm):
 	lname = StringField('Last Name', validators=[DataRequired()])
 	phnumber = StringField('Phone Number', validators=[DataRequired()])
 	addSubmit = SubmitField('Add')
+
+class RemoveContact(FlaskForm):
+	pnumber = StringField('Phone Number', validators=[DataRequired()])
+	remSubmit = SubmitField('Remove')

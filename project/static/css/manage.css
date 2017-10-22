@@ -5,17 +5,28 @@
 	height: 100%;
 }
 
+.forms {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+}
+
 form {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	top: 40%;
-	left: 35%;
-	right: 40%;
-	bottom: 40%;
-	position: absolute;
 	font-size: 20px;
 	color: #000000;
+}
+
+.add {
+	margin-left: 200px;
+	margin-right: 100px;
+}
+
+.remove {
+	justify-content: center;
+	margin-left: 200px;
 }
 
 input[type=text] {
@@ -57,6 +68,15 @@ input[type=submit] {
 		padding: 0;
 		border: 0;
 	}
+	.forms {
+		flex-direction: column;
+	}
+	.add {
+		margin: 0;
+	}
+	.remove {
+		margin: 0;
+	}
 	input[type=text] {
 		width: 350px;
 		margin-right: 5px;
@@ -79,6 +99,15 @@ input[type=submit] {
 		margin: 0;
 		padding: 0;
 		border: 0;
+	}
+	.forms {
+		flex-direction: column;
+	}
+	.add {
+		margin: 0;
+	}
+	.remove {
+		margin: 0;
 	}
 	input[type=text] {
 		width: 250px;
