@@ -27,6 +27,20 @@ input[type=password] {
 	background-color: #f7f7e3;
 }
 
+a.reg {
+	text-decoration: none;
+}
+
+a.reg:link,
+a.reg:visited {
+	color: #405C36;
+}
+
+a.reg:hover,
+a.reg:active {
+	color: #9BCF97;
+}
+
 @media only screen and (max-width: 500px) {
 	form {
 		top: 0%;

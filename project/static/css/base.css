@@ -4,7 +4,13 @@
 	box-sizing: border-box;
 }
 
+/*@font-face {
+	font-family: 'Lato';
+	src('/fonts/Lato-Regular.ttf');
+}*/
+
 body {
+	font-family: 'Lato', sans-serif;
 	background-color: #c1cdcd;
 	height: 100%;
 	width: 100%;
