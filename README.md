@@ -1,5 +1,5 @@
 # messaging-system
-Combining Flask and Twilio to create a messaging service that will send out messages to a list of contacts.
+Combines Flask and Twilio to create a messaging service that will send out text messages to a list of contacts.
 
 Installation and Setup
 -----------
@@ -33,11 +33,11 @@ used Bootstrap or another framework to do some of the heavy lifting and make it
 look a little better.
 
 Other features I may or may not add in the future:
--ability to import a contact list from a file
--ability to send voice messages
--ability to see contact list and interact with it more intuitively
--user privileges (see above)
--bootstrap (see above)
+- ability to import a contact list from a file
+- ability to send voice messages
+- ability to see contact list and interact with it more intuitively
+- user privileges (see above)
+- bootstrap (see above)
 
 
 Changelog
