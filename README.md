@@ -1,7 +1,7 @@
 # messaging-system
 Combines Flask and Twilio to create a messaging service that will send out text messages to a list of contacts.
 
-##Installation and Setup
+Installation and Setup
 -----------
 This was written in Python 3. Check the requirements.txt for dependencies used. 
 
@@ -26,7 +26,7 @@ You will also need to set up your Twilio account information as the following en
 
 If everything is set up properly, you should be able to run 'run.py' and start the service.
 
-##Disclaimer
+Disclaimer
 -----------
 
 I wrote this as a way to familiarize myself with Flask, Twilio, and a number of other things. Instead of spending the time and effort making it into something worth using, I walked away once I had learned what I could. Due to that, I wouldn't recommened attempting to use this in any important situation. 
